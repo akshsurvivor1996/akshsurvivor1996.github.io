@@ -96,13 +96,13 @@
 			{
 				const lastposition = {x: this.x, y: this.y};
 				this.direction *= -1;
-				//this.lastmouse.x += Math.sin(this.radians)*2;
-				//this.lastmouse.y += Math.tan(this.radians);
-				this.lastmouse.x += (mouse.x - this.lastmouse.x)*0.03;
-				this.lastmouse.y += (mouse.y - this.lastmouse.y)*0.03;
+				//this.lastmouse.x += Math.sin(this.radians)*canvas.width/2;
+				//this.lastmouse.y += Math.cos(this.radians)*canvas.height/2;
+				this.lastmouse.x += (mouse.x - this.lastmouse.x)*0.05;
+				this.lastmouse.y += (mouse.y - this.lastmouse.y)*0.05;
 				this.radians += this.velocity;
-				this.x = this.lastmouse.x + this.direction*Math.cos(this.radians)*this.distancefromcenter;//
-				this.y = this.lastmouse.y + this.direction*Math.sin(this.radians)*this.distancefromcenter;//
+				this.x = this.lastmouse.x + Math.cos(this.radians)*this.distancefromcenter;
+				this.y = this.lastmouse.y + Math.sin(this.radians)*this.distancefromcenter;
 				cntxt.beginPath();
 				cntxt.fillStyle = "lightblue";
 				cntxt.textAlign = "center";
@@ -133,7 +133,7 @@
 		{
 			particles = [];
 
-			for(let i=0;i<150;i++)
+			for(let i=0;i<200;i++)
 			{
 				particles.push(new Particle(canvas.width/2,canvas.height/2,Math.random()*(3)+1,randomColor(colors)));
 			}
