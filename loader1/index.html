@@ -98,17 +98,18 @@
 				this.direction *= -1;
 				//this.lastmouse.x += Math.sin(this.radians)*canvas.width/2;
 				//this.lastmouse.y += Math.cos(this.radians)*canvas.height/2;
-				this.lastmouse.x += (mouse.x - this.lastmouse.x)*0.05;
-				this.lastmouse.y += (mouse.y - this.lastmouse.y)*0.05;
-				this.radians += this.velocity;
-				this.x = this.lastmouse.x + Math.cos(this.radians)*this.distancefromcenter;
-				this.y = this.lastmouse.y + Math.sin(this.radians)*this.distancefromcenter;
 				cntxt.beginPath();
 				cntxt.fillStyle = "lightblue";
 				cntxt.textAlign = "center";
 				cntxt.font = "bold " + canvas.height*0.035 +"px Arial";
 				cntxt.fillText("Ignite'18",this.lastmouse.x,this.lastmouse.y);
 				cntxt.closePath();
+				this.lastmouse.x += (mouse.x - this.lastmouse.x)*0.05;
+				this.lastmouse.y += (mouse.y - this.lastmouse.y)*0.05;
+				this.radians += this.velocity;
+				this.x = this.lastmouse.x + Math.cos(this.radians)*this.distancefromcenter;
+				this.y = this.lastmouse.y + Math.sin(this.radians)*this.distancefromcenter;
+				
 				this.draw(lastposition);
 			};
 
@@ -120,8 +121,7 @@
 				cntxt.moveTo(lastposition.x,lastposition.y);
 				cntxt.lineTo(this.x,this.y);
 				cntxt.stroke();*/
-
-				cntxt.arc(this.x,this.y,this.radius,0,Math.PI*2);
+				cntxt.arc(this.x +Math.random()*2,this.y +Math.random()*2,this.radius,0,Math.PI*2);
 				cntxt.fillStyle = this.color;
 				cntxt.fill();
 				cntxt.closePath();
@@ -133,7 +133,7 @@
 		{
 			particles = [];
 
-			for(let i=0;i<200;i++)
+			for(let i=0;i<100;i++)
 			{
 				particles.push(new Particle(canvas.width/2,canvas.height/2,Math.random()*(3)+1,randomColor(colors)));
 			}
@@ -142,7 +142,7 @@
 		function animate()
 		{
 			window.requestAnimationFrame(animate);
-			cntxt.fillStyle = 'rgba(0,0,0,0.1)';
+			cntxt.fillStyle = 'rgba(0,0,0,0.05)';
 			cntxt.fillRect(0,0,canvas.width,canvas.height);//
 			particles.forEach(particle =>{particle.update();});
 			
