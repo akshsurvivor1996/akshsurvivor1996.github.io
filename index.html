@@ -5,7 +5,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="icon" type="image/png" href="3.png" sizes="16x16" />
+	<link rel="shortcut icon" type="image/png" href="3.png" sizes="16x16" />	
+	<link href="https://fonts.googleapis.com/css?family=Nunito:700" rel="stylesheet">
+	
 	<style type="text/css">
 		body
 		{
@@ -34,7 +36,7 @@
 <body >
 	<div id="skip" style="z-index: 10; position: absolute; right:10px; bottom: 30px; visibility: hidden; width: 60
 	px; height: 60px;">
-	<span class="fa fa-arrow-circle-right"  style="font-size: 40px; color: #00ffff;"></span>
+	<span class="fa fa-arrow-circle-right"  style="font-size: 50px; color: #00ffff;"></span>
 	</div>
 	<canvas id="loadingcanvas" style="z-index: 0;"></canvas>
 	<script type="text/javascript">
@@ -90,7 +92,8 @@
 			this.color = color;
 			this.radians = Math.random() * Math.PI * 2;
 			this.velocity = Math.random()*(0.005)+0.006;
-			this.distancefromcenter = randomIntFromRange(canvas.height*0.1,canvas.height*0.25);
+			this.size = canvas.height; 
+			this.distancefromcenter = randomIntFromRange(this.size*0.11,this.size*0.35);
 			this.lastmouse = {x: x,y: y};
 			this.direction = 1;
 			this.update = () =>
@@ -107,7 +110,7 @@
 				cntxt.beginPath();
 				cntxt.fillStyle = "lightblue";
 				cntxt.textAlign = "center";
-				cntxt.font = "bold " + canvas.height*0.035 +"px Arial";
+				cntxt.font = "bold " + this.size*0.038 +"px Nunito";
 				cntxt.fillText("Ignite'18",this.lastmouse.x,this.lastmouse.y);
 				cntxt.closePath();
 				this.draw(lastposition);
@@ -134,7 +137,17 @@
 		{
 			particles = [];
 
-			for(let i=0;i<200;i++)
+			let num;
+			if(window.matchMedia("(max-width: 768px)").matches)
+			{
+    			num = 150;
+			}
+			else
+			{
+				num = 200;
+			}
+
+			for(let i=0;i<num;i++)
 			{
 				particles.push(new Particle(canvas.width/2,canvas.height/2,Math.random()*(3)+1,randomColor(colors)));
 			}
